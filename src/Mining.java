@@ -10,15 +10,27 @@ public class Mining {
     Road road;
 
     public void start() {
+        int time = 1;
         while (!isover()) {
-
+            System.out.println("第" + time++ + "s");
         }
     }
 
     // 判断结束表示
-    // 所有车回到会车区
     private boolean isover() {
-        return false;
+        // 所有车回到会车区 && all == 0 && 车都没有负载
+        if (road.getCarInMeetingArea() != cars.size()) {
+            return false;
+        }
+        if (all != 0) {
+            return false;
+        }
+        for (Car car : cars) {
+            if (car.getCategory() != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Mining(int all, int[] categories, int[] meetingAreaInfo, int[] roadLength) {

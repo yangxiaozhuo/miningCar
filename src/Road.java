@@ -9,9 +9,18 @@ public class Road {
         return "矿道信息如下:\n" + head + "矿道信息如上。";
     }
 
-//    public int getCarInMeetingArea() {
-//
-//    }
+    public int getCarInMeetingArea() {
+        int res = 0;
+        Node cur = head;
+        while (cur != null) {
+            if (cur instanceof MeetingArea && cur.left != null && cur.right != null) {
+                res += ((MeetingArea) cur).getCars().size();
+            }
+            cur = cur.right;
+        }
+        return res;
+    }
+
     public Road() {
     }
 
@@ -44,10 +53,8 @@ public class Road {
     }
 
     //  路段
-    class Section {
+    class Section extends Node {
         int len;
-        MeetingArea left;
-        MeetingArea right;
 
         // 方向0表示左，1表示右.-1表示无车
         int direct;
@@ -69,16 +76,13 @@ public class Road {
     }
 
     // 会车区class
-    public class MeetingArea {
+    public class MeetingArea extends Node {
         // 会车区大小
         int size;
 
         // 会车区车辆
         HashSet<Car> cars;
 
-        // 左侧道路
-        Section left;
-        Section right;
 
         @Override
         public String toString() {
@@ -104,17 +108,9 @@ public class Road {
             return sb.toString();
         }
 
-        public MeetingArea(Section left, Section right) {
-            this.size = 0;
-            this.cars = new HashSet<>();
-        }
-
         public MeetingArea(int size) {
             this.size = size;
             cars = new HashSet<>();
-        }
-
-        public MeetingArea() {
         }
 
         public int getSize() {
@@ -132,27 +128,27 @@ public class Road {
         public void setCars(HashSet<Car> cars) {
             this.cars = cars;
         }
+    }
 
-        public Section getLeft() {
+    class Node {
+        // 左侧道路
+        Node left;
+        Node right;
+
+        public Node getLeft() {
             return left;
         }
 
-        public void setLeft(Section left) {
+        public void setLeft(Node left) {
             this.left = left;
         }
 
-        public Section getRight() {
+        public Node getRight() {
             return right;
         }
 
-        public void setRight(Section right) {
+        public void setRight(Node right) {
             this.right = right;
         }
     }
-
-//    class Node {
-//        // 左侧道路
-//        Node left;
-//        Node right;
-//    }
 }
