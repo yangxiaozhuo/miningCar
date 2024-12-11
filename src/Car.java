@@ -18,8 +18,15 @@ public class Car {
         this.position = position;
     }
 
-    public ArrayList<Integer> getPosition() {
-        return position;
+    public void getPosition() {
+        System.out.println(position);
+    }
+    public void addPosition(int pos) {
+        position.add(pos);
+    }
+
+    public int getCurPosition() {
+        return position.get(position.size() - 1);
     }
 
     @Override
