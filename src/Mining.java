@@ -50,6 +50,15 @@ public class Mining {
             for (Car c : toLeftCar) {
                 doLeft(c);
             }
+            Road.Node cur = road.head;
+            while (cur != null) {
+                if (cur instanceof Road.Section) {
+                    if (((Road.Section) cur).getCarNum() == 0) {
+                        ((Road.Section) cur).setDirect(-1);
+                    }
+                }
+                cur = cur.right;
+            }
         }
 
     }

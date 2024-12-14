@@ -120,9 +120,9 @@ public class Road {
 
         public void removeCar() {
             this.carNum--;
-            if (carNum == 0) {
-                this.direct = -1;
-            }
+//            if (carNum == 0) {
+//                this.direct = -1;
+//            }
         }
 
         public int getLen() {
